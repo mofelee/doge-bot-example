@@ -1,11 +1,11 @@
-const re = /如果有人问你(.+)(,|，|。|\.)你就回答(.+)/;
 const answers = require('./answers.json')
 const fs = require('fs')
 const path = require('path')
 
+const re = /如果有人问你(.+)(,|，|。|\.)你就回答(.+)/;
+
 module.exports = async function(msg) {
   const text = msg.text();
-  console.log(__dirname, answers, text)
 
   if (answers[text]) {
     return msg.say(answers[text], msg.from());
