@@ -2,7 +2,7 @@ const answers = require('./answers.json')
 const fs = require('fs')
 const path = require('path')
 
-const re = /如果有人问你(.+)(,|，|。|\.)你就回答(.+)/;
+const re = /如果有人问你(.+)[,，。\.]你就(?:回答|告诉他)(.+)/;
 
 module.exports = async function(msg) {
   const text = msg.text();
@@ -13,7 +13,7 @@ module.exports = async function(msg) {
 
   if (re.test(text)) {
     const answer = re.exec(text);
-    answers[answer[1]] = answer[3]
+    answers[answer[1]] = answer[2]
 
     fs.writeFileSync(path.resolve(__dirname, './answers.json'), JSON.stringify(answers))
 
